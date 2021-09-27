@@ -4,4 +4,4 @@ how to run this program
 
 - output of the program
 
-  ![alt text](https://github.com/mudiadamz/simple-maze/blob/main/img/demo.jpg?raw=true)
+  ![alt text](https://github.com/mudiadamz/simple-maze/blob/main/demo.jpg?raw=true)
