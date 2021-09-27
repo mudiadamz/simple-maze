@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Maze</title>
+</head>
+<body>
+	<h1>Maze</h1>
+	<h2>Input</h2>
+	<div>
+		<input type="number" id="input"><button id="generate">Generate</button>
+		<p id="inputError" style="color: red;display: none;">Number is to small</p>
+	</div>
+	<h2>Output</h2>
+	<pre id="output" style="min-width: 10rem;min-height: 10rem;border: 1px dashed; gray;"></pre>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+function validateSize(s){
+	var pnum = (s+1)/4;
+	return pnum>=1;
+}
+
+$(function(){
+	$(document).on("click","#generate", function () {
+		$("#inputError").hide();
+		$("#output").empty();
+		var input = parseInt($("#input").val())||0;
+		var output = "";
+		if(validateSize(input)){
+			var gate = 1;
+			for (var i=0;i<input;i++){
+				var isWall = i%2==0; //wall or gate
+				console.log("gate", gate, isWall)
+				for (var j=0;j<input;j++){
+					var isBorderWall = j===0||j===input-1;
+					if(isWall) {
+						if(j===gate){
+							output += " ";
+						}else{
+							output += "@";
+						}
+					}else if(isBorderWall){
+						output += "@";
+					}else{
+						output += " ";
+					}
+				}
+				output += "\n";
+
+				if(!isWall) gate = gate===1?input-2:1;//switch gate position
+			}
+			$("#output").text(output);
+		}else{
+			$("#inputError").show();
+		}
+	});
+
+});
+</script>
+</body>
+</html>
